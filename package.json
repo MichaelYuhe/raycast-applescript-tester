@@ -1,5 +1,6 @@
 {
   "$schema": "https://www.raycast.com/schemas/extension.json",
+  "version": "0.0.1",
   "name": "apple-script-tester",
   "title": "Apple Script Tester",
   "description": "Test your Apple Script!",
