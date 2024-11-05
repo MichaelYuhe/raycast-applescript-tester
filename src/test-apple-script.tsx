@@ -23,12 +23,24 @@ export default function Command() {
     setParamCount((prev) => prev + 1);
   };
 
+  const removeParam = () => {
+    const keys = Object.keys(params);
+    const lastKey = keys[keys.length - 1];
+    setParams((prev) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { [lastKey]: _, ...rest } = prev;
+      return rest;
+    });
+    setParamCount((prev) => prev - 1);
+  };
+
   return (
     <Form
       actions={
         <ActionPanel>
           <Action.SubmitForm title="Submit" onSubmit={handleSubmit} />
           <Action title="Add Parameter" shortcut={{ modifiers: ["cmd"], key: "n" }} onAction={addParam} />
+          <Action title="Remove Parameter" shortcut={{ modifiers: ["cmd"], key: "d" }} onAction={removeParam} />
         </ActionPanel>
       }
     >
