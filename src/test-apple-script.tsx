@@ -8,7 +8,12 @@ export default function Command() {
   const [paramCount, setParamCount] = useState(0);
 
   const handleSubmit = async () => {
-    const res = await runAppleScript(script);
+    let scriptWithParams = script;
+    Object.entries(params).forEach(([key, value]) => {
+      scriptWithParams = scriptWithParams.replace(new RegExp(`{${key}}`, "g"), value);
+    });
+
+    const res = await runAppleScript(scriptWithParams);
     await showHUD(res);
   };
 
@@ -46,8 +51,6 @@ export default function Command() {
           onChange={(newValue) => setParams((prev) => ({ ...prev, [key]: newValue }))}
         />
       ))}
-
-      <Form.Description text="" />
     </Form>
   );
 }
